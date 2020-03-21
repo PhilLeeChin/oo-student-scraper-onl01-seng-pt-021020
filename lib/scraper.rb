@@ -5,7 +5,20 @@ require 'pry'
 class Scraper
 
   def self.scrape_index_page(index_url)
-
+    student = []
+    html = Nokogiri::HTML(open(index_url))
+    index = profile_page.css("div.social-icon-container").children.css("a").map (|el| el.attributes('herf').value)
+    index.each do |link|
+      if link.include?("linkedin")
+        student[:location] = link
+      elsif link.include?("github")
+        student[:github] = link
+      elsif link.include?("twitter")
+        student[:twitter] = link
+      else
+        student[:blog] = link
+      end
+    end
   end
 
   def self.scrape_profile_page(profile_url)
