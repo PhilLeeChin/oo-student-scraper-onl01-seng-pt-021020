@@ -5,9 +5,7 @@ require 'pry'
 class Scraper
 
   def self.scrape_index_page(index_url)
-    student = {}
-    html = Nokogiri::HTML(open(index_url))
-    index = profile_page.css("div.social-icon-container").children.css("a").map (|el| el.attributes('herf'))
+
   end
 
   def self.scrape_profile_page(profile_url)
