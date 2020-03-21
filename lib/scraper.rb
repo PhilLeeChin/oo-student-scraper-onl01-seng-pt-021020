@@ -8,7 +8,7 @@ class Scraper
     index_html = open(index_url)
     index_doc = Nokogiri::HTML(index_html)
     student_cards = index_doc.css(".student_card")
-    students = []
+    students = {}
     student_cards.collect do |student_card_xml|
       students << {
         :name => student_card_xml.css("h4.student-name").text,
