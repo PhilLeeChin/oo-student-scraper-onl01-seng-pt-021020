@@ -5,18 +5,9 @@ require 'pry'
 class Scraper
 
   def self.scrape_index_page(index_url)
-    index_html = open(index_url)
-    index_doc = Nokogiri::HTML(index_html)
-    student_cards = index_doc.css(".student_card")
-    students = {}
-    student_cards.collect do |student_card_xml|
-      students << {
-        :name => student_card_xml.css("h4.student-name").text,
-        :location => student_card_xml.css("p.student-loctaion").text,
-        :profile_url => "./fixtures/student-site/" + student_card_xml.css("a").attributes("href").value
-      }
-    end
-    students
+    student = {}
+    html = Nokogiri::HTML(open(index_url))
+    index = profile_page.css("div.social-icon-container").children.css("a").map (|el| el.attributes('herf'))
   end
 
   def self.scrape_profile_page(profile_url)
